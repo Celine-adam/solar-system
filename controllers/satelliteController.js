@@ -1,69 +1,58 @@
-import satellite from "../satellites-dataset.js";
 import { StatusCodes } from "http-status-codes";
-export const getByName = (req, res) => {
-  const name = req.params.name;
-  const satellite = satellite.find(
-    (satellite) => satellite.name.toLowerCase() === name.toLowerCase()
-  );
-  if (satellite) {
-    return res.status(StatusCodes.OK).json(satellite);
-  } else {
-    return res
-      .status(StatusCodes.NOT_FOUND)
-      .json({ error: "Satellite not found" });
+import satellitesDataset from "../satellites-dataset.js";
+
+export const getByName = (req, res, next) => {
+  try {
+    const name = req.params.name.toLowerCase();
+    const satellites = satellitesDataset.find(
+      (satellite) => satellite.name.toLowerCase() === name
+    );
+    if (satellites) {
+      return res.status(StatusCodes.OK).json(satellites);
+    } else {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ error: "Satellite not found" });
+    }
+  } catch (error) {
+    next(error);
   }
 };
-export const getByRadius = (req, res) => {
-  const pick = req.params.pick.toLowerCase();
-  if (pick === "largest") {
-    const largestSatellite = satellites.reduce((prev, current) =>
+export const getByRadius = (req, res, next) => {
+  try {
+    const largestSatellite = satellitesDataset.reduce((prev, current) =>
       prev.radius > current.radius ? prev : current
     );
-    res
-      .status(200)
-      .send(
-        `The satellite with the largest radius is ${largestSatellite.name}, with a size of ${largestSatellite.radius} km`
-      );
-  } else if (pick === "smallest") {
-    const smallestSatellite = satellites.reduce((prev, current) =>
+
+    const smallestSatellite = satellitesDataset.reduce((prev, current) =>
       prev.radius < current.radius ? prev : current
     );
     res
       .status(200)
       .send(
-        `The satellite with the smallest radius is ${smallestSatellite.name}, with a size of ${smallestSatellite.radius} km`
+        `The satellite with the smallest radius is ${smallestSatellite.name}, with a size of ${smallestSatellite.radius} km.` +
+          "\n" +
+          `The satellite with the largest radius is ${largestSatellite.name}, with a size of ${largestSatellite.radius} km.`
       );
-  } else {
-    res.status(500).json({
-      error: "Invalid pick value. Please choose either 'largest' or 'smallest'",
-    });
+  } catch (error) {
+    next(error);
   }
 };
-export const getByDensity = (req, res) => {
-  const pick = req.params.pick.toLowerCase();
-  if (pick === "highest") {
-    const highestDensitySatellite = satellites.reduce((prev, current) =>
+export const getByDensity = (req, res, error) => {
+  try {
+    const highestDensitySatellite = satellitesDataset.reduce((prev, current) =>
       prev.density > current.density ? prev : current
     );
-    res
-      .status(200)
-      .send(
-        `The satellite with the highest density is ${highestDensitySatellite.name}, with a density of ${highestDensitySatellite.density}`
-      );
-  } else if (pick === "lowest") {
-    const lowestDensitySatellite = satellites.reduce((prev, current) =>
+
+    const lowestDensitySatellite = satellitesDataset.reduce((prev, current) =>
       prev.density < current.density ? prev : current
     );
-    res
-      .status(200)
-      .send(
-        `The satellite with the lowest density is ${lowestDensitySatellite.name}, with a density of ${lowestDensitySatellite.density}`
-      );
-  } else {
-    res
-      .status(500)
-      .json({
-        error: "Invalid pick value. Please choose either 'highest' or 'lowest'",
-      });
+    res.status(200).send(
+      `The satellite with the highest density is ${highestDensitySatellite.name}, with a density of ${highestDensitySatellite.density}.and
+      \n
+        The satellite with the highest density is ${highestDensitySatellite.name}, with a density of ${highestDensitySatellite.density}`
+    );
+  } catch (error) {
+    next(error);
   }
 };

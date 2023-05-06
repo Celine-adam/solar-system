@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import Planets from "./Planets";
 
 export default function Home() {
   return (
@@ -66,45 +65,9 @@ export default function Home() {
           </li>
         </ul>
       </section>
-      <ul id="descriptions">
-        <li>
-          <h2 id="sun">Sun</h2>
-        </li>
-        <li>
-          <h2 id="mercury">Mercury</h2>
-        </li>
-        <li>
-          <h2 id="venus">Venus</h2>
-        </li>
-
-        <li>
-          <h2 id="earth">Earth</h2>
-        </li>
-
-        <li>
-          <h2 id="mars">Mars</h2>
-        </li>
-
-        <li>
-          <h2 id="jupiter">Jupiter</h2>
-        </li>
-
-        <li>
-          <h2 id="saturn">Saturn</h2>
-        </li>
-
-        <li>
-          <h2 id="uranus">Uranus</h2>
-        </li>
-
-        <li>
-          <h2 id="neptune">Neptune</h2>
-        </li>
-
-        <li>
-          <h2 id="pluto">Pluto</h2>
-        </li>
-      </ul>
+      <div id="descriptions">
+        <Planets />
+      </div>
     </div>
   );
 }

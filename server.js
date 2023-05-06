@@ -6,8 +6,8 @@ import planetsRouters from "./routes/planetsRouter.js";
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(`/api/satellite`, satelliteRoutes);
-app.use(`/api/planets`, planetsRouters);
+app.use("/api/satellite", satelliteRoutes);
+app.use("/api/planets", planetsRouters);
 app.all("*", (req, res) => {
   return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json("Invalid path");
 });

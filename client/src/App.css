@@ -6,8 +6,10 @@
   text-align: center;
   margin: 0;
   padding: 0;
+  width: 100%;
   min-height: 100vh;
   position: relative;
+  font-size: 1.5rem;
 }
 .header {
   margin: 0;
@@ -15,18 +17,20 @@
   display: flex;
   gap: 15px;
   list-style: none;
-  font-size: 1.5rem;
   font-weight: bold;
 }
 .header li {
   margin-top: 10px;
 }
 .header li .header-link {
+  margin-left: 15px;
+  margin-bottom: 15px;
   text-decoration: none;
   color: #386077;
 }
-h1 {
-  font-size: 4rem;
+h1,
+h2 {
+  color: #386077;
 }
 
 ul#descriptions {
@@ -39,7 +43,8 @@ ul#descriptions h2 {
   cursor: pointer;
   color: #386077;
   transition: all 0.15s ease-in;
-  font-size: 25px;
+  font-size: 30px;
+  font-weight: bolder;
   position: relative;
   z-index: 101;
   transform: scale(1);
@@ -49,26 +54,22 @@ ul#descriptions h2:hover {
   color: #aa4200;
   transform: scale(1.08);
 }
-ul#descriptions li p {
+.planet-card {
   position: absolute;
-  left: -250px;
-  top: 0;
-  width: 200px;
+  top: 50%;
+  left: 300%;
+  transform: translate(-300%, -50%);
+  width: 300px;
   display: inline;
   font-size: 13px;
   border-radius: 5px;
   transition: all 0.3s ease-in;
   background: #0f132c;
   padding: 30px;
-  color: #767892;
+  color: white;
   line-height: 1.7;
   z-index: 100;
   border: 1px solid #1c203c;
-}
-ul#descriptions h2:hover + p {
-  /* visibility: visible;
-  opacity: 0.9; */
-  left: -280px;
 }
 
 /* Solar System Styles */
@@ -211,7 +212,6 @@ ul.solarsystem li.saturn {
   width: 400px;
   height: 400px;
   border-radius: 202px;
-
   top: 120px;
   left: 280px;
   z-index: 94;
@@ -333,68 +333,51 @@ ul.solarsystem li.pluto {
     transform: rotate(360deg);
   }
 }
-/* planets continuer */
-
-.planets {
+/* planets information continuer */
+.planets-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-}
-.earth-info {
-  list-style-type: none;
+  justify-content: center;
   text-align: center;
-  font-size: 1.2rem;
 }
-
-.earth-info li {
-  margin-bottom: 10px;
-}
-
-.earth-info li:before {
-  content: "\2022";
-
-  color: #386077;
-}
-.earth-info li span {
-  font-weight: bolder;
-  color: #386077;
+#earth-info-section {
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  width: 400px;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: white;
 }
 
 .wrapper {
   margin: 20px;
   padding: 20px;
-
-  border-radius: 5px;
-  width: 300px;
-}
-
-h2 {
+  border-radius: 10px;
   text-align: center;
-  color: #386077;
 }
 
 .container {
   display: flex;
   flex-direction: column;
+  gap: 25px;
   align-items: center;
 }
 
-.btn-div {
+.btn-group {
   display: flex;
+  flex-direction: row;
+  gap: 10px;
   justify-content: center;
-  margin-bottom: 20px;
 }
 
 .btn {
-  margin: 10px;
-  padding: 10px 20px;
-  border: 2px solid white;
+  border: 1px solid white;
   border-radius: 5px;
   background-color: transparent;
   color: white;
-  z-index: 1;
+  padding: 14px 40px;
+  width: 450px;
 }
 
 .btn:hover {
@@ -404,4 +387,74 @@ h2 {
 .planet-info {
   display: flex;
   gap: 20px;
+  list-style: none;
+}
+.planet-info li {
+  font-weight: bolder;
+}
+
+/* satellites Component */
+
+.satellite-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.satellite-form {
+  margin-bottom: 2rem;
+}
+
+.satellite-form input {
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  color: white;
+  border: 2px solid white;
+  background-color: transparent;
+  border-radius: 0.25rem;
+}
+
+.satellite-form button {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #0077cc;
+  color: white;
+
+  cursor: pointer;
+}
+
+.satellite-form button:hover {
+  background-color: #005ea8;
+}
+
+.satellite-name {
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  width: 400px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: #386077;
+}
+
+.satellite-name p {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  color: white;
+
+  text-align: center;
+}
+
+.satellite-info {
+  margin-bottom: 2rem;
+}
+.satellite-info p {
+  width: 800px;
 }

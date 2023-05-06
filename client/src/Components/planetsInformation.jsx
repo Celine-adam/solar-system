@@ -5,6 +5,9 @@ import axios from "axios";
 export default function PlanetsInformation() {
   const [planets, setPlanets] = useState([]);
   const [distance, setDistance] = useState([]);
+  const [temperature, setTemperature] = useState([]);
+  const [day, setDay] = useState([]);
+  const [orbital, setOrbital] = useState([]);
   const [earth, setEarth] = useState([]);
   const url = "http://localhost:5001/api/planets";
   useEffect(() => {
@@ -36,70 +39,151 @@ export default function PlanetsInformation() {
       setDistance([]);
     }
   };
+  const meanTemperature = async (e) => {
+    console.log("im clicking");
+    try {
+      const res = await axios.get(`${url}/temperature/${e.target.value}`);
+      const data = res.data;
+      setTemperature(Array.isArray(data) ? data : [data]);
+    } catch (error) {
+      console.error(error);
+      setTemperature([]);
+    }
+  };
+  const lengthOfDay = async (e) => {
+    console.log("im clicking");
+    try {
+      const res = await axios.get(`${url}/day/${e.target.value}`);
+      const data = res.data;
+      setDay(Array.isArray(data) ? data : [data]);
+    } catch (error) {
+      console.error(error);
+      setDay([]);
+    }
+  };
+  const orbitalPeriod = async (e) => {
+    console.log("im clicking");
+    try {
+      const res = await axios.get(`${url}/orbit/${e.target.value}`);
+      const data = res.data;
+      setOrbital(Array.isArray(data) ? data : [data]);
+    } catch (error) {
+      console.error(error);
+      setOrbital([]);
+    }
+  };
 
   return (
-    <div className="planets">
-      <h2>Earth</h2>
-      <p>Here is some information about our beautiful planet. </p>
-      <ul className="earth-info">
-        <li>
-          The Number of moons: <span>{earth.numberOfMoons}</span>
-        </li>
-        <li>
-          The Mean temperature:<span> {earth.meanTemperature}</span>
-        </li>
-        <li>
-          The Length of day:<span>{earth.lengthOfDay}</span>
-        </li>
-      </ul>
-      <div className="wrapper">
-        <h2>Number of Moons</h2>
-        <div className="container">
-          <div className="btn-div">
-            <button value="most" className="btn" onClick={numberOfMoons}>
-              Most
-            </button>
-            <button value="none" className="btn" onClick={numberOfMoons}>
-              None
-            </button>
+    <div className="planets-info">
+      <h1>Earth</h1>
+      <section id="earth-info-section">
+        <p>Here is some information about our beautiful planet.</p>
+        <p>
+          The number of moons: <span>{earth.numberOfMoons}</span>
+        </p>
+        <p>
+          The mean temperature: <span>{earth.meanTemperature}</span>
+        </p>
+        <p>
+          The length of day: <span>{earth.lengthOfDay}</span>
+        </p>
+      </section>
+      <section>
+        <div className="wrapper">
+          <h2>Number of Moons</h2>
+          <div className="container">
+            <div className="btn-group">
+              <button className="btn" value="most" onClick={numberOfMoons}>
+                The planets that have the most moons
+              </button>
+              <button className="btn" value="none" onClick={numberOfMoons}>
+                The planets with no moons
+              </button>
+            </div>
+            <ul className="planet-info">
+              {planets.map((planet) => (
+                <li key={planet.id}>{planet.name}</li>
+              ))}
+            </ul>
           </div>
-          <ul className="planet-info">
-            {planets.map((planet) => (
-              <li key={planet.id}>{planet.name}</li>
-            ))}
-          </ul>
         </div>
-      </div>
-      <div className="wrapper">
-        <h2>Distance From the Sun</h2>
-        <div className="container">
-          <div className="btn-div">
-            <button className="btn" value="furthest" onClick={distanceFromSun}>
-              Furthest
-            </button>
-            <button className="btn" value="closest" onClick={distanceFromSun}>
-              Closest
-            </button>
+        <div className="wrapper">
+          <h2>Distance From the Sun</h2>
+          <div className="container">
+            <div className="btn-group">
+              <button
+                className="btn"
+                value="furthest"
+                onClick={distanceFromSun}
+              >
+                The planet farthest from the sun
+              </button>
+              <button className="btn" value="closest" onClick={distanceFromSun}>
+                The planet closest to the sun
+              </button>
+            </div>
+            <ul className="planet-info">
+              {distance.map((planet) => (
+                <li key={planet.id}>{planet.name}</li>
+              ))}
+            </ul>
           </div>
-          <ul className="planet-info">
-            {distance.map((planet) => (
-              <li key={planet.id}>{planet.name}</li>
-            ))}
-          </ul>
         </div>
-      </div>
+        <div className="wrapper">
+          <h2>Mean Temperature</h2>
+          <div className="container">
+            <div className="btn-group">
+              <button className="btn" value="hottest" onClick={meanTemperature}>
+                The hottest planet
+              </button>
+              <button className="btn" value="coldest" onClick={meanTemperature}>
+                The coldest planet
+              </button>
+            </div>
+            <ul className="planet-info">
+              {temperature.map((planet) => (
+                <li key={planet.id}>{planet.name}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="wrapper">
+          <h2>Length Of Day</h2>
+          <div className="container">
+            <div className="btn-group">
+              <button className="btn" value="longest" onClick={lengthOfDay}>
+                The planet with the longest day
+              </button>
+              <button className="btn" value="shortest" onClick={lengthOfDay}>
+                The planet with the shortest day
+              </button>
+            </div>
+            <ul className="planet-info">
+              {day.map((planet) => (
+                <li key={planet.id}>{planet.name}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="wrapper">
+          <h2>Orbital Period</h2>
+          <div className="container">
+            <div className="btn-group">
+              <button className="btn" value="longest" onClick={orbitalPeriod}>
+                The planet with the longest orbital
+              </button>
+              <button className="btn" value="shortest" onClick={orbitalPeriod}>
+                The planet with the shortest orbital
+              </button>
+            </div>
+            <ul className="planet-info">
+              {orbital.map((planet) => (
+                <li key={planet.id}>{planet.name}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
-//   <Routes>
-//   <Route exact path="/numberofmoons" element={<Planets />} />
-//   <Route path="/satellits" element={<Satellites />} />
-// </Routes>
-// <div>
-//   <Link className="link" to={"/planetsInfo"}>
-//     Planets Information
-//   </Link>
-//   <Link className="link" to={"/satellits"}>
-//     Satellites
-//   </Link>
-// </div>

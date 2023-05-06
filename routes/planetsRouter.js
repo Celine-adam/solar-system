@@ -7,9 +7,10 @@ import {
   getByLengthOfDay,
   getByMeanTemperature,
   getByOrbitalPeriod,
+  getPlanets,
 } from "../controllers/planetsController.js";
 const router = express.Router();
-
+router.get("/", getPlanets);
 router.get("/find/:name", getByName);
 router.get("/size/:pick", getByRadius);
 router.get("/moons/:pick", getByNumberOfMoons);
