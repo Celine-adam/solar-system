@@ -25,12 +25,12 @@ export default function Satellites() {
 
   useEffect(() => {
     const density = async () => {
-      const res = await axios.get(`${url}/api/planets/density`);
+      const res = await axios.get(`${url}/api/satellite/density`);
       const data = res.data;
       setSatelliteDensity(data);
     };
     const radius = async () => {
-      const res = await axios.get(`${url}/api/planets/size`);
+      const res = await axios.get(`${url}/api/satellite/size`);
       const data = res.data;
       setSatelliteRadius(data);
     };
