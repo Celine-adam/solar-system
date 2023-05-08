@@ -4,7 +4,8 @@ import Planet from "./Planet.jsx";
 
 export default function Planets() {
   const [planets, setPlanets] = useState([]);
-  const url = "http://localhost:5001/api/planets";
+  const url = " https://solar-system-eumc.onrender.com";
+  // "http://localhost:5001/api/planets";
   const [hoveredPlanetIndex, setHoveredPlanetIndex] = useState(-1);
 
   const handleMouseOver = (index) => {
@@ -18,7 +19,7 @@ export default function Planets() {
   useEffect(() => {
     async function fetchPlanets() {
       try {
-        const res = await axios.get(url);
+        const res = await axios.get(`${url}/api/planets`);
         setPlanets(res.data);
       } catch (error) {
         console.log(error);

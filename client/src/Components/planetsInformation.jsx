@@ -9,10 +9,11 @@ export default function PlanetsInformation() {
   const [day, setDay] = useState([]);
   const [orbital, setOrbital] = useState([]);
   const [earth, setEarth] = useState([]);
-  const url = "http://localhost:5001/api/planets";
+  const url = "https://solar-system-eumc.onrender.com";
+  // "http://localhost:5001/api/planets";
   useEffect(() => {
     (async () => {
-      const res = await axios.get(`${url}/find/Earth`);
+      const res = await axios.get(`${url}/api/planets/find/Earth`);
       const data = res.data;
       setEarth(data);
     })();
@@ -21,7 +22,7 @@ export default function PlanetsInformation() {
   const numberOfMoons = async (e) => {
     console.log("im clicking");
     try {
-      const res = await axios.get(`${url}/moons/${e.target.value}`);
+      const res = await axios.get(`${url}/api/planets/moons/${e.target.value}`);
       const data = res.data;
       setPlanets(Array.isArray(data) ? data : [data]);
     } catch (error) {
@@ -31,7 +32,7 @@ export default function PlanetsInformation() {
   };
   const distanceFromSun = async (e) => {
     try {
-      const res = await axios.get(`${url}/sun/${e.target.value}`);
+      const res = await axios.get(`${url}/api/planets/sun/${e.target.value}`);
       const data = res.data;
       setDistance(Array.isArray(data) ? data : [data]);
     } catch (error) {
@@ -42,7 +43,9 @@ export default function PlanetsInformation() {
   const meanTemperature = async (e) => {
     console.log("im clicking");
     try {
-      const res = await axios.get(`${url}/temperature/${e.target.value}`);
+      const res = await axios.get(
+        `${url}/api/planets/temperature/${e.target.value}`
+      );
       const data = res.data;
       setTemperature(Array.isArray(data) ? data : [data]);
     } catch (error) {
@@ -53,7 +56,7 @@ export default function PlanetsInformation() {
   const lengthOfDay = async (e) => {
     console.log("im clicking");
     try {
-      const res = await axios.get(`${url}/day/${e.target.value}`);
+      const res = await axios.get(`${url}/api/planets/day/${e.target.value}`);
       const data = res.data;
       setDay(Array.isArray(data) ? data : [data]);
     } catch (error) {
@@ -64,7 +67,7 @@ export default function PlanetsInformation() {
   const orbitalPeriod = async (e) => {
     console.log("im clicking");
     try {
-      const res = await axios.get(`${url}/orbit/${e.target.value}`);
+      const res = await axios.get(`${url}/api/planets/orbit/${e.target.value}`);
       const data = res.data;
       setOrbital(Array.isArray(data) ? data : [data]);
     } catch (error) {

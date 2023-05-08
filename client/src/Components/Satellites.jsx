@@ -6,6 +6,7 @@ export default function Satellites() {
   const [satelliteName, setSatelliteName] = useState([]);
   const [satelliteRadius, setSatelliteRadius] = useState("");
   const [satelliteDensity, setSatelliteDensity] = useState("");
+  const url = " https://solar-system-eumc.onrender.com";
   const handleChange = (event) => {
     setName(event.target.value);
   };
@@ -13,9 +14,7 @@ export default function Satellites() {
   const handleSatelliteName = async (event) => {
     event.preventDefault(); // prevent form from submitting and refreshing page
     try {
-      const res = await axios.get(
-        `http://localhost:5001/api/satellite/find/${name}`
-      ); // combine URL and path
+      const res = await axios.get(`${url}/api/satellite/find/${name}`); // combine URL and path
       const data = res.data;
       setSatelliteName(Array.isArray(data) ? data : [data]);
     } catch (error) {
@@ -23,15 +22,15 @@ export default function Satellites() {
       setSatelliteName([]);
     }
   };
-  const url = "http://localhost:5001/api/satellite";
+
   useEffect(() => {
     const density = async () => {
-      const res = await axios.get(`${url}/density`);
+      const res = await axios.get(`${url}/api/planets/density`);
       const data = res.data;
       setSatelliteDensity(data);
     };
     const radius = async () => {
-      const res = await axios.get(`${url}/size`);
+      const res = await axios.get(`${url}/api/planets/size`);
       const data = res.data;
       setSatelliteRadius(data);
     };
